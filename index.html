@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elifnur Çiftçi</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #frame {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgb(166, 3, 3);
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        #text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(94, 12, 12);
+            font-size: 50px;
+            
+            font-family: Georgia, serif;
+            font-style: normal;
+            font-stretch: condensed;
+            font-weight: lighter;
+            pointer-events: none;
+        }
+        #info{
+            position: absolute;
+            font-size: 13px;
+            color: rgba(174, 25, 25, 0.755);
+            font-family: Georgia, serif;
+            pointer-events: none;
+            max-width: 100vw;
+            word-wrap: break-word;
+            margin: 0;
+        }
+        #copyright {
+            position: absolute;
+            font-size: 13px;
+            color: rgba(174, 25, 25, 0.755);
+            font-family: Georgia, serif;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        #togglecontainer {
+          position: absolute;
+          top: 5%;
+          left: 5%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column; /* Dikey hizalama */
+          align-items: center; /* Yatayda ortala */
+          gap: 5px; /* Yazı ve yuvarlak arasındaki boşluk */
+          pointer-events: none;
+        }
+
+        #mode-toggle {
+          writing-mode: vertical-lr; /* Metni dikey yaz */
+          transform: rotate(180deg); /* Metni ters çevir */
+          font-family: Georgia, serif;
+          font-size: 17px;
+          color: rgba(174, 25, 25, 0.755);
+          cursor: pointer;
+          pointer-events: all;
+          white-space: nowrap; /* Yazının tek satırda kalmasını sağla */
+        }
+
+        #mode-indicator {
+          width: 17px;
+          height: 17px;
+          border: 2px solid rgba(174, 25, 25, 0.755);
+          border-radius: 50%;
+          cursor: pointer;
+          pointer-events: all;
+          flex-shrink: 0; /* Yuvarlağın boyutunun sabit kalmasını sağla */
+          order: -1; /* Yuvarlağı yazının üstüne yerleştir */
+        }
+
+        #mode-indicator.active {
+          background-color: rgba(174, 25, 25, 0.755);
+        }
+    </style>
+    <script type="module" crossorigin src="/portfolio/assets/index-CViG7cM4.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="frame"></div>
+    
+    <div id="text">Ordo Ab Chao</div>
+    <p id="info">For PC: Left-click brings order. Left-hold rotates. Right-hold relocatess. Scroll zooms in/out. For mobile: just touch, hold and drag freely. Note: Outline inspired by Keita Yamada.</p>
+    <div id="copyright">© Elifnur Çiftçi</div>
+    <script>
+      function positionElements() {
+          const frame = document.getElementById("frame");
+          const info = document.getElementById("info");
+          const copyright = document.getElementById("copyright");
+
+          // Frame'in pozisyonunu al
+          const frameRect = frame.getBoundingClientRect();
+
+          // Copyright, frame'in üstüne yerleşsin
+          copyright.style.top = `${frameRect.top - 20}px`;
+          copyright.style.left = `${frameRect.left}px`;
+
+          // Info, frame'in altına yerleşsin
+          info.style.top = `${frameRect.bottom + 5}px`;
+          info.style.left = `${frameRect.left}px`;
+
+          togglecontainer.style.top = `${frameRect.bottom - 70}px`;
+          togglecontainer.style.left = `${frameRect.left -50}px`;
+      }
+
+      // İlk konumlandırma ve pencere boyutu değiştikçe güncelleme
+      window.addEventListener("resize", positionElements);
+      window.addEventListener("load", positionElements);
+    </script>
+    <div id="togglecontainer">
+      <div id="mode-toggle">LIGHT / DARK</div>
+      <div id="mode-indicator"></div>
+    </div>
+  </body>
+  
+</html>
