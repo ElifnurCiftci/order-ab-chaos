@@ -17,7 +17,7 @@
             height: 90%;
             border: 1px solid rgb(166, 3, 3);
             box-sizing: border-box;
-            pointer-events: none; /* Tıklamaları engelle */
+            pointer-events: none;
         }
         #text {
             position: absolute;
@@ -35,26 +35,23 @@
             font-style: normal;
             font-stretch: condensed;
             font-weight: lighter;
-            pointer-events: none; /* Tıklamaları engelle */
+            pointer-events: none;
         }
-        #info {
-          position: absolute;
-          bottom: 5px;
-          left: 5%;
-          font-size: 13px;
-          color: rgba(174, 25, 25, 0.755);
-          font-family: Georgia, serif;
-          pointer-events: none;
-      }
-      #copyright {
-        position: absolute;
-        top: 20px;
-        left: 5%;
-        font-size: 15px;
-        color: rgba(213, 69, 69, 0.6); /* Koyu mod için beyaz, hafif şeffaf */
-        font-family: Georgia, serif;
-        font-weight: bold;
-     }
+        #info{
+            position: absolute;
+            font-size: 13px;
+            color: rgba(174, 25, 25, 0.755);
+            font-family: Georgia, serif;
+            pointer-events: none;
+        }
+        #copyright {
+            position: absolute;
+            font-size: 13px;
+            color: rgba(174, 25, 25, 0.755);
+            font-family: Georgia, serif;
+            font-weight: bold;
+            pointer-events: none;
+        }
     </style>
   </head>
   <body>
@@ -62,7 +59,30 @@
     <div id="frame"></div>
     <div id="text">Order Ab Chaos</div>
     <script type="module" src="src/main.js"></script>
-    <p id="info">Right-click brings order. Right hold rotates. Left hold relocates.</p>
+    <p id="info">For PC: Right-click brings order. Right hold rotates. Left hold relocates. For mobile: just touch, hold and drag freely</p>
     <div id="copyright">© Elifnur Çiftçi</div>
+
+    <script>
+      function positionElements() {
+          const frame = document.getElementById("frame");
+          const info = document.getElementById("info");
+          const copyright = document.getElementById("copyright");
+
+          // Frame'in pozisyonunu al
+          const frameRect = frame.getBoundingClientRect();
+
+          // Copyright, frame'in üstüne yerleşsin
+          copyright.style.top = `${frameRect.top - 20}px`;
+          copyright.style.left = `${frameRect.left}px`;
+
+          // Info, frame'in altına yerleşsin
+          info.style.top = `${frameRect.bottom + 5}px`;
+          info.style.left = `${frameRect.left}px`;
+      }
+
+      // İlk konumlandırma ve pencere boyutu değiştikçe güncelleme
+      window.addEventListener("resize", positionElements);
+      window.addEventListener("load", positionElements);
+    </script>
   </body>
 </html>
