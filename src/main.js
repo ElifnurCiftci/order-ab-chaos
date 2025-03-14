@@ -14,10 +14,31 @@ const sigma = 10, rho = 28, beta = 8 / 3;
 const dt = 0.01;
 const numSteps = 5000;
 
+let isDarkMode = true; 
+
+const modeToggle = document.getElementById("mode-toggle");
+const modeIndicator = document.getElementById("mode-indicator");
+
+// Yuvarlak şekli güncelle
+function updateIndicator() {
+  if (isDarkMode) {
+    modeIndicator.classList.add("active");
+  } else {
+    modeIndicator.classList.remove("active");
+  }
+}
+
+
+// Buton ve yuvarlak şekle tıklama olayı ekle
+modeToggle.addEventListener("click", toggleTheme);
+modeIndicator.addEventListener("click", toggleTheme);
+
+
 init();
 animate();
 
 document.addEventListener('click', toggleMode);
+document.getElementById('mode-toggle').addEventListener('click', toggleTheme);
 
 function init() {
     scene = new THREE.Scene();
@@ -35,6 +56,8 @@ function init() {
     generateLorenzAttractor();
     
     window.addEventListener('resize', onWindowResize);
+    updateIndicator();
+    setTheme(isDarkMode);
 }
 
 function generateRandomParticles() {
@@ -47,10 +70,10 @@ function generateRandomParticles() {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     
     const material = new THREE.PointsMaterial({
-        color: 0xffffff,
-        size: 0.01, // Partikül boyutunu küçült
+        color: isDarkMode ? 0xffffff : 0x000000,
+        size: isDarkMode ? 0.01: 0.5 , // Partikül boyutunu küçült
         transparent: true,
-        opacity: 0.9,
+        opacity: isDarkMode ? 0.9: 1,
         sizeAttenuation: true, // Kamera uzaklığına göre boyut değişimi
         alphaTest: 0.5, // Yuvarlak şekil için alphaTest
     });
@@ -128,6 +151,22 @@ function toggleMode() {
             );
         }
     }
+}
+
+// Mod değiştirme fonksiyonu
+function toggleTheme() {
+    isDarkMode = !isDarkMode;
+    setTheme(isDarkMode);
+    updateIndicator();
+  }
+
+
+function setTheme(isDarkMode) {
+    // Arka plan rengini ayarla
+    renderer.setClearColor(isDarkMode ? 0x000000 : 0xffffff);
+
+    // Partikül rengini güncelle
+    particles[0].material.color.set(isDarkMode ? 0xffffff : 0x000000);
 }
 
 function onWindowResize() {
