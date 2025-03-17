@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,8 +31,8 @@
             padding-left: 2.8vw; /*  Moves the timeline right */
             padding-right: 0.26vw; /*  Small padding on the right */
             width: fit-content;
-            max-width: 30vw; 
-
+            max-width: 100%; 
+            max-height: 80vh;
             /*  Expands the mask area to prevent clipping */
             -webkit-mask-image: linear-gradient(to bottom, 
                 rgba(0, 0, 0, 0) 0%, 
@@ -40,15 +41,14 @@
                 rgba(0, 0, 0, 0) 100%);
             
             /*  Moves the mask area slightly to the right */
-            -webkit-mask-position: -0.52vw 0; /* Moves mask slightly left */
-            -webkit-mask-size: calc(100% + 1.04vw) 100%; /* Expands mask area */
+          
             cursor: pointer;
         }
 
         .timeline-item {
           border-left: 0.1vw solid rgb(94, 12, 12); /*  Keeps a thin vertical timeline */
           position: relative;
-          padding: 2.78vh 0.26vw; /*  Responsive padding */
+          padding: 1.5vh 0.26vw; /*  Responsive padding */
           transition: transform 0.3s ease-in-out;
           cursor: pointer;
         }
@@ -66,8 +66,24 @@
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
         }
 
+        .icon {
+            width: 2.5vh;
+            height: 2.5vh;
+            position: absolute;
+            left: -0.052vw; /* Centers the circle on the line */
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+        }
+
         /*  Circle expands & dissolves ONLY when hovering over the timeline item */
         .timeline-item:hover .circle {
+            transform: translate(-50%, -50%) scale(1.8);
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+        /*  Circle expands & dissolves ONLY when hovering over the timeline item */
+        .timeline-item:hover .icon {
             transform: translate(-50%, -50%) scale(1.8);
             opacity: 0.3;
             filter: blur(5px);
@@ -183,7 +199,7 @@
           display: inline-block; /* Ensures scaling works properly */
         }
         #header h1 {
-          font-size: 7vh;
+          font-size: 6vh;
           font-weight:50;
           margin: 0;
           white-space: nowrap;
@@ -224,7 +240,7 @@
             position: absolute;
             bottom: 4%;
             right: 5%;
-            width: 15vw;
+            width: 25vw;
             max-width: 30vw;
             max-height: 80vh;
             color: rgb(94, 12, 12);
@@ -247,7 +263,7 @@
 
         /* Adjust positioning when screen is smaller */
         /* Küçük ekranlarda menüyü yeniden konumlandır */
-        @media only screen and (max-width: 768px){
+        @media only screen and (max-width: 600px){
           #mode-toggle {
             font-size: 1.7vh;
           }
@@ -265,7 +281,7 @@
               right: 5%;
               width: 80vw;
               max-width: 80vw;
-              max-height: 40vh;
+              max-height: 50vh;
           }
           #menu {
             top: calc(15% + 5vh);
@@ -275,17 +291,27 @@
           }
 
           #menu button {
-            font-size: 3vh;
+            font-size: 2vh;
           }
 
           #copyright {
             font-size: 9px;
           }
           .timeline {
-            padding-left: 2vw;
+            padding-left: 2.4vw;
             padding-right: 0.13vw;
             max-width: 80vw;
             max-height: 35vh;
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; 
+          }
+          .timeline-item {
+              white-space: normal; /* Allow text to wrap */
+          }
+
+          .text {
+              white-space: normal; /* Allow text to wrap */
+              font-size: 2vh; /* Reduce font size for better fit */
           }
         }
     </style>
@@ -369,7 +395,7 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="circle"></div>
-                    <div class="text">Private Ankara Açı Highschool (2016 - 2019)</div>
+                    <div class="text">Private Ankara Açı Highschool (2015 - 2019)</div>
                 </div>
                 <div class="timeline-item">
                     <div class="circle"></div>
@@ -390,7 +416,30 @@
                 </div>
             </div>
         </div>
+        <div id="contact" class="section" style="display: none;">
+          <div class="timeline">
+            <!-- E-mail -->
+            <div class="timeline-item" style="border-left:none;">
+              <div class="icon"><i class="fas fa-envelope icon"></i> <!-- E-mail ikonu --></div>
+              <div class="text">
+                <a href="mailto:elifnur.ciftci@gmail.com" class="text" target="_blank" rel="noopener noreferrer">
+                  elifnur.ciftci20@gmail.com
+                </a>
+              </div>
+            </div>
+        
+            <!-- LinkedIn -->
+            <div class="timeline-item" style="border-left:none;">
+              <div class="icon"><i class="fab fa-linkedin icon"></i> <!-- LinkedIn ikonu --></div>
+              <div class="text">
+                <a href="https://www.linkedin.com/in/elifnur-%C3%A7ift%C3%A7i-100a751b9/" class="text" target="_blank" rel="noopener noreferrer">
+                  My Linkedin
+                </a>
+              </div>
+            </div>
 
+          </div>
+        </div>
       
     </div>
     <div id="togglecontainer">
@@ -426,7 +475,7 @@
           info.style.left = `${vw(frameRect.left) -5}vw`;
 
           // Toggle container, frame's bottom-left
-          togglecontainer.style.top = `${vh(frameRect.bottom) - 15}vh`;
+          togglecontainer.style.top = `${vh(frameRect.bottom) - 17}vh`;
           togglecontainer.style.left = `${vw(frameRect.left) - 8}vw`;
       }
 

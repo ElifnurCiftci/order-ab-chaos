@@ -56,8 +56,8 @@ function showSection(sectionId) {
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("#menu button").forEach(button => {
         button.addEventListener("click", function () {
-            const sectionId = this.dataset.section; // ✅ Correct way to get data-section
-            console.log("Clicked:", sectionId); // ✅ Debugging log
+            const sectionId = this.dataset.section; // Correct way to get data-section
+            console.log("Clicked:", sectionId); //  Debugging log
             if (sectionId) {
                 showSection(sectionId);
             } else {
