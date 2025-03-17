@@ -182,7 +182,7 @@
           display: inline-block; /* Ensures scaling works properly */
         }
         #header h1 {
-          font-size: 7vh;
+          font-size: 6vh;
           font-weight:50;
           margin: 0;
           white-space: nowrap;
@@ -285,6 +285,16 @@
             padding-right: 0.13vw;
             max-width: 80vw;
             max-height: 35vh;
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; 
+          }
+          .timeline-item {
+              white-space: normal; /* Allow text to wrap */
+          }
+
+          .text {
+              white-space: normal; /* Allow text to wrap */
+              font-size: 2vh; /* Reduce font size for better fit */
           }
         }
     </style>
