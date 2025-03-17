@@ -30,7 +30,7 @@
             padding-left: 2.8vw; /*  Moves the timeline right */
             padding-right: 0.26vw; /*  Small padding on the right */
             width: fit-content;
-            max-width: 26vw; 
+            max-width: 30vw; 
 
             /*  Expands the mask area to prevent clipping */
             -webkit-mask-image: linear-gradient(to bottom, 
@@ -173,9 +173,9 @@
           position: absolute;
           top: 5%;
           left: 5%;
-          width: 40vw;
-          max-width: 90%;
-          max-height: 40vh;
+          width: 50vw;
+          max-width: 50vw;
+          max-height: 30vh;
           color: rgb(94, 12, 12);
           font-family: 'Times New Roman', Times, serif;
           font-stretch: condensed; /* Tries to use a condensed version if available */
@@ -193,8 +193,8 @@
         }
         #menu {
           position: absolute;
-          top: calc(10% + 12vh); /* Header yüksekliğine bağlı olarak aşağı kaydır */
-          left: 5%;
+          top: calc(15% + 5vh); /* Header yüksekliğine bağlı olarak aşağı kaydır */
+          left: 4.5%;
           width: 20vw;
           display: flex;
           flex-direction: column;
@@ -205,18 +205,24 @@
         /* Küçük ekranlarda menüyü yeniden konumlandır */
         @media (max-width: 768px) {
           #menu {
-            top: calc(30% + 10vh);
-            left: 13%;
+            top: calc(15% + 5vh);
+            left: calc(6% + 8vw);
             transform: translateX(-50%);
             text-align: center;
           }
 
           #menu button {
-            font-size: 4vh;
+            font-size: 1vh;
           }
 
           #copyright {
             font-size: 9px;
+          }
+          .timeline {
+            padding-left: 1.5vw;
+            padding-right: 0.13vw;
+            max-width: 80vw;
+            max-height: 35vh;
           }
         }
 
@@ -237,9 +243,9 @@
             position: absolute;
             bottom: 4%;
             right: 5%;
-            width: 16%;
-            max-width: 20vw;
-            max-height: 85vh;
+            width: 15vw;
+            max-width: 30vw;
+            max-height: 80vh;
             color: rgb(94, 12, 12);
             font-family: Georgia, serif;
             line-height: 1.5;
@@ -264,10 +270,13 @@
               position: absolute;
                 bottom: 5%;
                 right: 5%;
-                max-width: 5
-                0vh;
                 text-align: right;
                 font-size: 2vh;
+                bottom: 4%;
+                right: 5%;
+                width: 80vw;
+                max-width: 80vw;
+                max-height: 40vh;
             }
         }
     </style>
@@ -286,7 +295,7 @@
         <button data-section="projects">Projects</button>
         <button data-section="education">Education</button>
         <button data-section="experience">Experience</button>
-        <button data-section="contact">Contact Me</button>
+        <button data-section="contact">Contact</button>
       </div>
       
       <div id="content">
