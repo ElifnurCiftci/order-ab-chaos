@@ -40,6 +40,33 @@ animate();
 document.addEventListener('click', toggleMode);
 document.getElementById('mode-toggle').addEventListener('click', toggleTheme);
 
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll(".section").forEach(section => {
+        section.style.display = "none";
+    });
+
+    // Show the selected section (if it exists)
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.style.display = "block";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("#menu button").forEach(button => {
+        button.addEventListener("click", function () {
+            const sectionId = this.dataset.section; // ✅ Correct way to get data-section
+            console.log("Clicked:", sectionId); // ✅ Debugging log
+            if (sectionId) {
+                showSection(sectionId);
+            } else {
+                console.error("Button missing data-section attribute!");
+            }
+        });
+    });
+});
+
 function init() {
     scene = new THREE.Scene();
     
@@ -168,6 +195,9 @@ function setTheme(isDarkMode) {
     // Partikül rengini güncelle
     particles[0].material.color.set(isDarkMode ? 0xffffff : 0x000000);
 }
+
+
+
 
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;

@@ -6,51 +6,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elifnur Çiftçi's Portfolio</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
+         :root {
+          color-scheme: light dark;
         }
-        #frame {
+
+        html, body {
+          background-color: #fff; /* Arka planı sabitle */
+          color: rgb(94, 12, 12); /* Varsayılan koyu kırmızı */
+          forced-color-adjust: none; /* Tarayıcının renkleri değiştirmesini engelle */
+          -webkit-text-fill-color: currentColor; /* Opera'nın yazı rengini zorla değiştirmesini önle */
+        }
+        body {
+          margin: 0;
+          overflow: hidden;
+        }
+        a {
+            text-decoration: none; /* Removes underline */
+            font-style: italic; /* Makes text italic */
+            color: inherit; /* Keeps the same color as surrounding text */
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px; /* Moves the timeline right so it isn't affected by clipping */
+            padding-right: 5px;
+            width: fit-content;
+            max-width: 500px;
+
+            /*  Expands the mask area to prevent clipping */
+            -webkit-mask-image: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0) 0%, 
+                rgba(0, 0, 0, 1) 10%, 
+                rgba(0, 0, 0, 1) 90%, 
+                rgba(0, 0, 0, 0) 100%);
+            
+            /*  Moves the mask area slightly to the right */
+            -webkit-mask-position: -10px 0;
+            -webkit-mask-size: calc(100% + 20px) 100%;
+            cursor: pointer;
+        }
+
+        .timeline-item {
+            border-left: 2px solid rgb(94, 12, 12); /* Main vertical timeline */
+            position: relative;
+            padding: 30px 5px;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        /* Circle default state */
+        .circle {
+            width: 26px;
+            height: 26px;
+            background-color: rgb(94, 12, 12);
+            border-radius: 50%;
             position: absolute;
-            top: 5%;
-            left: 5%;
-            width: 90%;
-            height: 90%;
-            border: 1px solid rgb(94, 12, 12);
-            box-sizing: border-box;
-            pointer-events: none;
+            left: -1px; /* Centers the circle on the line */
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+        }
+
+        /*  Circle expands & dissolves ONLY when hovering over the timeline item */
+        .timeline-item:hover .circle {
+            transform: translate(-50%, -50%) scale(1.8);
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+
+        /* Text default state */
+        .text {
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            color: rgb(94, 12, 12);
+            padding-left: 15px;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Text enlarges ONLY when hovering over the timeline item */
+        .timeline-item:hover .text {
+            transform: scale(1.1);
+        }
+
+
+        #frame {
+          position: absolute;
+          top: 5%;
+          left: 5%;
+          width: 90%;
+          height: 90%;
+          border: 1px solid rgb(94, 12, 12);
+          box-sizing: border-box;
+          pointer-events: none;
         }
         #text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgb(94, 12, 12);
-            font-size: 50px;
-            
-            font-family: Georgia, serif;
-            font-style: normal;
-            font-stretch: condensed;
-            font-weight: lighter;
-            pointer-events: none;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: rgb(94, 12, 12);
+          font-size: 50px;
+          font-family: Georgia, serif;
+          font-style: normal;
+          font-stretch: condensed;
+          font-weight: lighter;
+          pointer-events: none;
         }
         #info{
-            position: absolute;
-            font-size: 13px;
-            color: rgb(94, 12, 12);
-            font-family: Georgia, serif;
-            pointer-events: none;
-            max-width: 100vw;
-            word-wrap: break-word;
-            margin: 0;
+          position: absolute;
+          font-size: 13px;
+          color: rgb(94, 12, 12);
+          font-family: Georgia, serif;
+          pointer-events: none;
+          max-width: 100vw;
+          word-wrap: break-word;
+          margin: 0;
         }
         #copyright {
-            position: absolute;
-            font-size: 13px;
-            color: rgb(111, 21, 21);
-            font-family: Georgia, serif;
-            font-weight: bolder;
-            pointer-events: none;
+          position: absolute;
+          font-size: 13px;
+          color: rgb(111, 21, 21);
+          font-family: Georgia, serif;
+          font-weight: bolder;
+          pointer-events: none;
         }
         #togglecontainer {
           position: absolute;
@@ -89,11 +169,205 @@
         #mode-indicator.active {
           background-color: rgba(174, 25, 25, 0.652)
         }
+        #header {
+          position: absolute;
+          top: 5%;
+          left: 5%;
+          width: 40%;
+          max-width: 90%;
+          max-height: 50vh;
+          color: rgb(94, 12, 12);
+          font-family: 'Times New Roman', Times, serif;
+          font-stretch: condensed; /* Tries to use a condensed version if available */
+          display: inline-block; /* Ensures scaling works properly */
+        }
+        #header h1 {
+          font-size: 85px;
+          font-weight:50;
+          margin: 0;
+        }
+        #header h2 {
+          font-size: 30px;
+          font-weight: lighter;
+          margin: 0;
+        }
+        #menu {
+          position: absolute;
+          top: calc(10% + 120px); /* Header yüksekliğine bağlı olarak aşağı kaydır */
+          left: 5%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          pointer-events: all;
+        }
+
+        /* Küçük ekranlarda menüyü yeniden konumlandır */
+        @media (max-width: 768px) {
+          #menu {
+            top: calc(30% + 100px);
+            left: 13%;
+            transform: translateX(-50%);
+            text-align: center;
+          }
+
+          #menu button {
+            font-size: 18px;
+          }
+        }
+
+        #menu button {
+          background: none;
+          border: none;
+          font-size: 20px;
+          font-family: Georgia, serif;
+          color: rgb(94, 12, 12);
+          cursor: pointer;
+          text-align: left;
+          transition: transform 0.3s ease-in-out;
+        }
+        #menu button:hover {
+          transform: scale(1.1);
+        }
+        #content {
+            position: absolute;
+            bottom: 4%;
+            right: 5%;
+            width: 16%;
+            max-height: 85vh;
+            color: rgb(94, 12, 12);
+            font-family: Georgia, serif;
+            font-size: 20px;
+            line-height: 1.5;
+            text-align: right;
+            cursor: pointer;
+            pointer-events: all;
+            /*  Make it scrollable */
+            overflow: auto;
+            
+            /*  Hide scrollbar (Works in most browsers) */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE & Edge */
+        }
+
+        #content::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+
+        /* Adjust positioning when screen is smaller */
+        @media (max-width: 768px) {
+            #content {
+              position: absolute;
+                bottom: 5%;
+                right: 5%;
+                width: 70%;
+                text-align: right;
+                font-size: 19px;
+            }
+        }
     </style>
   </head>
   <body>
     <div id="app"></div>
-    <div id="frame"></div>
+    <div id="frame">
+      <div id="header">
+        <h1>Elifnur Çiftçi</h1>
+        <h2>Developer & Designer</h2>
+      </div>
+      
+      <div id="menu">
+        <button data-section="bio">About Me</button>
+        <button data-section="projects">Projects</button>
+        <button data-section="education">Education</button>
+        <button data-section="experience">Experience</button>
+      </div>
+      
+      <div id="content">
+        <div id="bio" class="section" style="display: block;">
+          Born in 2001
+          in Ankara, Turkey.
+          I craft code & design,
+          shaped by the balance
+          of chaos and order.
+          Patterns emerge
+          from the unpredictable.
+          I explore this tension
+          to build harmonic,
+          dynamic experiences.
+        </div>
+
+        <div id="projects" class="section" style="display: none;">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="circle"></div>
+              <div class="text">
+                <a href="https://gitlab.com/ElifnurCiftci/verilog-calculator_group-project_sqrroot" class="text" target="_blank" rel="noopener noreferrer">
+                  Basic Calculator Group Project - Beginner Verilog
+                </a>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="circle"></div>
+              <div class="text">
+                <a href="https://gitlab.com/ElifnurCiftci/some-risc-v-instructions-written-in-verilog" class="text" target="_blank" rel="noopener noreferrer">
+                  Basic RISC V Processor Design - Beginner Verilog
+                </a>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="circle"></div>
+              <div class="text">
+                <a href="https://github.com/ElifnurCiftci/372Proje" class="text" target="_blank" rel="noopener noreferrer">
+                  Farmacy Stock Dataset Listing - Beginner Project (SQL)
+                </a>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="circle"></div>
+              <div class="text">
+                <a href="https://github.com/ElifnurCiftci/Otomobile-Risc-and-Price-Analyze" class="text" target="_blank" rel="noopener noreferrer">
+                  Otomobile Risc and Price Analyze - Beginner project for machine learning
+                </a>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="circle"></div>
+              <div class="text">
+                <a href="https://github.com/ElifnurCiftci/Otomobile-Risc-and-Price-Analyze" class="text" target="_blank" rel="noopener noreferrer">
+                  My Food Assistant - Graduation Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div id="education" class="section" style="display: none;">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="text">Private Ankara Açı Highschool (2016 - 2019)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="text">TOBB University of Economics and Technology - Department of Computer Science (2019 - still)</div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="experience" class="section" style="display: none;">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="text">BiSoft Information Technologies Inc. - Front-end Developer (3 month internship)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="text">idvlabs Software and Consulting Services Inc. - Developer (3 month internship)</div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
     
     <div id="text">ex chao nova harmonia</div>
     <script type="module" src="src/main.js"></script>
@@ -117,7 +391,7 @@
           info.style.left = `${frameRect.left}px`;
 
           togglecontainer.style.top = `${frameRect.bottom - 70}px`;
-          togglecontainer.style.left = `${frameRect.left -50}px`;
+          togglecontainer.style.left = `${frameRect.left -30}px`;
       }
 
       // İlk konumlandırma ve pencere boyutu değiştikçe güncelleme
