@@ -27,10 +27,10 @@
         }
         .timeline {
             position: relative;
-            padding-left: 30px; /* Moves the timeline right so it isn't affected by clipping */
-            padding-right: 5px;
+            padding-left: 2.8vw; /*  Moves the timeline right */
+            padding-right: 0.26vw; /*  Small padding on the right */
             width: fit-content;
-            max-width: 500px;
+            max-width: 26vw; 
 
             /*  Expands the mask area to prevent clipping */
             -webkit-mask-image: linear-gradient(to bottom, 
@@ -40,17 +40,17 @@
                 rgba(0, 0, 0, 0) 100%);
             
             /*  Moves the mask area slightly to the right */
-            -webkit-mask-position: -10px 0;
-            -webkit-mask-size: calc(100% + 20px) 100%;
+            -webkit-mask-position: -0.52vw 0; /* Moves mask slightly left */
+            -webkit-mask-size: calc(100% + 1.04vw) 100%; /* Expands mask area */
             cursor: pointer;
         }
 
         .timeline-item {
-            border-left: 2px solid rgb(94, 12, 12); /* Main vertical timeline */
-            position: relative;
-            padding: 30px 5px;
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
+          border-left: 0.1vw solid rgb(94, 12, 12); /*  Keeps a thin vertical timeline */
+          position: relative;
+          padding: 2.78vh 0.26vw; /*  Responsive padding */
+          transition: transform 0.3s ease-in-out;
+          cursor: pointer;
         }
 
         /* Circle default state */
@@ -60,7 +60,7 @@
             background-color: rgb(94, 12, 12);
             border-radius: 50%;
             position: absolute;
-            left: -1px; /* Centers the circle on the line */
+            left: -0.052vw; /* Centers the circle on the line */
             top: 50%;
             transform: translate(-50%, -50%);
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
@@ -78,8 +78,8 @@
             font-family: 'Times New Roman', Times, serif;
             font-weight: normal;
             color: rgb(94, 12, 12);
-            padding-left: 15px;
-            letter-spacing: 0.5px;
+            padding-left: 0.78vw; /* Converted from 15px */
+            letter-spacing: 0.026vw; /* Converted from 0.5px */
             line-height: 1.4;
             transition: transform 0.3s ease-in-out;
         }
@@ -115,7 +115,7 @@
         }
         #info{
           position: absolute;
-          font-size: 13px;
+          font-size: 1.4vh;
           color: rgb(94, 12, 12);
           font-family: Georgia, serif;
           pointer-events: none;
@@ -125,7 +125,7 @@
         }
         #copyright {
           position: absolute;
-          font-size: 13px;
+          font-size: 1.5vh;
           color: rgb(111, 21, 21);
           font-family: Georgia, serif;
           font-weight: bolder;
@@ -139,7 +139,7 @@
           display: flex;
           flex-direction: column; /* Dikey hizalama */
           align-items: center; /* Yatayda ortala */
-          gap: 5px; /* Yazı ve yuvarlak arasındaki boşluk */
+          gap: 0.5vh; /* Yazı ve yuvarlak arasındaki boşluk */
           pointer-events: none;
         }
 
@@ -147,7 +147,7 @@
           writing-mode: vertical-lr; /* Metni dikey yaz */
           transform: rotate(180deg); /* Metni ters çevir */
           font-family: Georgia, serif;
-          font-size: 17px;
+          font-size: 2.4vh;
           color: rgb(94, 12, 12);
           cursor: pointer;
           pointer-events: all;
@@ -155,8 +155,8 @@
         }
 
         #mode-indicator {
-          width: 17px;
-          height: 17px;
+          width: 1.6vh;
+          height: 1.6vh;
           border: 2px solid rgba(94, 12, 12, 0.755);
           border-radius: 50%;
           cursor: pointer;
@@ -192,18 +192,18 @@
         }
         #menu {
           position: absolute;
-          top: calc(10% + 120px); /* Header yüksekliğine bağlı olarak aşağı kaydır */
+          top: calc(10% + 12vh); /* Header yüksekliğine bağlı olarak aşağı kaydır */
           left: 5%;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 1vh;
           pointer-events: all;
         }
 
         /* Küçük ekranlarda menüyü yeniden konumlandır */
         @media (max-width: 768px) {
           #menu {
-            top: calc(30% + 100px);
+            top: calc(30% + 10vh);
             left: 13%;
             transform: translateX(-50%);
             text-align: center;
@@ -211,6 +211,10 @@
 
           #menu button {
             font-size: 4vh;
+          }
+
+          #copyright {
+            font-size: 9px;
           }
         }
 
@@ -278,6 +282,7 @@
         <button data-section="projects">Projects</button>
         <button data-section="education">Education</button>
         <button data-section="experience">Experience</button>
+        <button data-section="contact">Contact Me</button>
       </div>
       
       <div id="content">
@@ -364,10 +369,13 @@
                 </div>
             </div>
         </div>
-      </div>
+
       
     </div>
-    
+    <div id="togglecontainer">
+      <div id="mode-toggle">LIGHT / DARK</div>
+      <div id="mode-indicator"></div>
+    </div>
     <div id="text">ex chao nova harmonia</div>
     <script type="module" src="src/main.js"></script>
     <p id="info">For PC: Left-click brings order. Left-hold rotates. Right-hold relocates. Scroll zooms in/out. For mobile: just touch, hold and drag freely. Note: Outline inspired by Keita Yamada.</p>
@@ -377,30 +385,36 @@
           const frame = document.getElementById("frame");
           const info = document.getElementById("info");
           const copyright = document.getElementById("copyright");
+          const togglecontainer = document.getElementById("togglecontainer");
 
-          // Frame'in pozisyonunu al
+          // Get frame's position
           const frameRect = frame.getBoundingClientRect();
+          const viewportHeight = window.innerHeight; // Full viewport height
+          const viewportWidth = window.innerWidth; // Full viewport width
 
-          // Copyright, frame'in üstüne yerleşsin
-          copyright.style.top = `${frameRect.top - 20}px`;
-          copyright.style.left = `${frameRect.left}px`;
+          // Convert px to vh & vw
+          const vh = value => (value / viewportHeight) * 100;
+          const vw = value => (value / viewportWidth) * 100;
 
-          // Info, frame'in altına yerleşsin
-          info.style.top = `${frameRect.bottom + 5}px`;
-          info.style.left = `${frameRect.left}px`;
+          // Copyright, frame's top-left
+          copyright.style.top = `${vh(frameRect.top) - 8}vh`;
+          copyright.style.left = `${vw(frameRect.left) - 5}vw`;
 
-          togglecontainer.style.top = `${frameRect.bottom - 70}px`;
-          togglecontainer.style.left = `${frameRect.left -30}px`;
+          // Info, frame's bottom-left
+          info.style.top = `${vh(frameRect.bottom) - 4.8}vh`;
+          info.style.left = `${vw(frameRect.left) -5}vw`;
+
+          // Toggle container, frame's bottom-left
+          togglecontainer.style.top = `${vh(frameRect.bottom) - 15}vh`;
+          togglecontainer.style.left = `${vw(frameRect.left) - 8}vw`;
       }
+
 
       // İlk konumlandırma ve pencere boyutu değiştikçe güncelleme
       window.addEventListener("resize", positionElements);
       window.addEventListener("load", positionElements);
     </script>
-    <div id="togglecontainer">
-      <div id="mode-toggle">LIGHT / DARK</div>
-      <div id="mode-indicator"></div>
-    </div>
+    
   </body>
   
 </html>
