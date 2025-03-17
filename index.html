@@ -31,7 +31,7 @@
             padding-right: 0.26vw; /*  Small padding on the right */
             width: fit-content;
             max-width: 30vw; 
-
+            max-height: 80vh;
             /*  Expands the mask area to prevent clipping */
             -webkit-mask-image: linear-gradient(to bottom, 
                 rgba(0, 0, 0, 0) 0%, 
@@ -48,7 +48,7 @@
         .timeline-item {
           border-left: 0.1vw solid rgb(94, 12, 12); /*  Keeps a thin vertical timeline */
           position: relative;
-          padding: 2.78vh 0.26vw; /*  Responsive padding */
+          padding: 1.5vh 0.26vw; /*  Responsive padding */
           transition: transform 0.3s ease-in-out;
           cursor: pointer;
         }
@@ -247,7 +247,7 @@
 
         /* Adjust positioning when screen is smaller */
         /* Küçük ekranlarda menüyü yeniden konumlandır */
-        @media only screen and (max-width: 768px){
+        @media only screen and (max-width: 600px){
           #mode-toggle {
             font-size: 1.7vh;
           }
@@ -265,7 +265,7 @@
               right: 5%;
               width: 80vw;
               max-width: 80vw;
-              max-height: 40vh;
+              max-height: 50vh;
           }
           #menu {
             top: calc(15% + 5vh);
@@ -275,14 +275,14 @@
           }
 
           #menu button {
-            font-size: 3vh;
+            font-size: 2vh;
           }
 
           #copyright {
             font-size: 9px;
           }
           .timeline {
-            padding-left: 2vw;
+            padding-left: 2.4vw;
             padding-right: 0.13vw;
             max-width: 80vw;
             max-height: 35vh;
