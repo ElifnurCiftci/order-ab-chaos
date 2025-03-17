@@ -112,6 +112,7 @@
           font-stretch: condensed;
           font-weight: lighter;
           pointer-events: none;
+          white-space: nowrap;
         }
         #info{
           position: absolute;
@@ -185,6 +186,7 @@
           font-size: 7.5vh;
           font-weight:50;
           margin: 0;
+          white-space: nowrap;
         }
         #header h2 {
           font-size: 3vh;
@@ -243,12 +245,16 @@
         /* Adjust positioning when screen is smaller */
         /* Küçük ekranlarda menüyü yeniden konumlandır */
         @media only screen and (max-width: 768px){
+          #text {
+            width: auto; /* Allow the width to adjust based on content */
+            font-size: 4vh; 
+          }
           #content {
             position: absolute;
               bottom: 5%;
               right: 5%;
               text-align: right;
-              font-size: 2.5vh;
+              font-size: 2vh;
               bottom: 4%;
               right: 5%;
               width: 80vw;
