@@ -202,30 +202,6 @@
           pointer-events: all;
         }
 
-        /* Küçük ekranlarda menüyü yeniden konumlandır */
-        @media (max-width: 768px) {
-          #menu {
-            top: calc(15% + 5vh);
-            left: calc(6% + 8vw);
-            transform: translateX(-50%);
-            text-align: center;
-          }
-
-          #menu button {
-            font-size: 1vh;
-          }
-
-          #copyright {
-            font-size: 9px;
-          }
-          .timeline {
-            padding-left: 1.5vw;
-            padding-right: 0.13vw;
-            max-width: 80vw;
-            max-height: 35vh;
-          }
-        }
-
         #menu button {
           background: none;
           border: none;
@@ -265,19 +241,40 @@
         }
 
         /* Adjust positioning when screen is smaller */
-        @media (max-width: 768px) {
-            #content {
-              position: absolute;
-                bottom: 5%;
-                right: 5%;
-                text-align: right;
-                font-size: 2vh;
-                bottom: 4%;
-                right: 5%;
-                width: 80vw;
-                max-width: 80vw;
-                max-height: 40vh;
-            }
+        /* Küçük ekranlarda menüyü yeniden konumlandır */
+        @media (max-width: 768px) or (pointer: coarse){
+          #content {
+            position: absolute;
+              bottom: 5%;
+              right: 5%;
+              text-align: right;
+              font-size: 2vh;
+              bottom: 4%;
+              right: 5%;
+              width: 80vw;
+              max-width: 80vw;
+              max-height: 40vh;
+          }
+          #menu {
+            top: calc(15% + 5vh);
+            left: calc(6% + 8vw);
+            transform: translateX(-50%);
+            text-align: center;
+          }
+
+          #menu button {
+            font-size: 1vh;
+          }
+
+          #copyright {
+            font-size: 9px;
+          }
+          .timeline {
+            padding-left: 1.5vw;
+            padding-right: 0.13vw;
+            max-width: 80vw;
+            max-height: 35vh;
+          }
         }
     </style>
   </head>
