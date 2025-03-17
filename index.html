@@ -183,7 +183,7 @@
           display: inline-block; /* Ensures scaling works properly */
         }
         #header h1 {
-          font-size: 7.5vh;
+          font-size: 7vh;
           font-weight:50;
           margin: 0;
           white-space: nowrap;
@@ -192,12 +192,14 @@
           font-size: 3vh;
           font-weight: lighter;
           margin: 0;
+          white-space: nowrap;
         }
         #menu {
           position: absolute;
           top: calc(15% + 5vh); /* Header yüksekliğine bağlı olarak aşağı kaydır */
           left: 4.5%;
           width: 20vw;
+          max-width: 40vw;
           display: flex;
           flex-direction: column;
           gap: 1vh;
@@ -213,6 +215,7 @@
           cursor: pointer;
           text-align: left;
           transition: transform 0.3s ease-in-out;
+          white-space: nowrap;
         }
         #menu button:hover {
           transform: scale(1.1);
@@ -245,6 +248,9 @@
         /* Adjust positioning when screen is smaller */
         /* Küçük ekranlarda menüyü yeniden konumlandır */
         @media only screen and (max-width: 768px){
+          #mode-toggle {
+            font-size: 1.7vh;
+          }
           #text {
             width: auto; /* Allow the width to adjust based on content */
             font-size: 4vh; 
@@ -269,14 +275,14 @@
           }
 
           #menu button {
-            font-size: 2.5vh;
+            font-size: 3vh;
           }
 
           #copyright {
             font-size: 9px;
           }
           .timeline {
-            padding-left: 1.5vw;
+            padding-left: 2vw;
             padding-right: 0.13vw;
             max-width: 80vw;
             max-height: 35vh;
@@ -303,7 +309,7 @@
       <div id="content">
         <div id="bio" class="section" style="display: block;">
           Born in 2001
-          in Ankara, Turkey.
+          in Ankara, Türkiye.
           I craft code & design,
           shaped by the balance
           of chaos and order.
