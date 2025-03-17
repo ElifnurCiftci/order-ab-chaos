@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="/portfolio/icon.svg">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +31,7 @@
             padding-left: 2.8vw; /*  Moves the timeline right */
             padding-right: 0.26vw; /*  Small padding on the right */
             width: fit-content;
-            max-width: 30vw; 
+            max-width: 100%; 
             max-height: 80vh;
             /*  Expands the mask area to prevent clipping */
             -webkit-mask-image: linear-gradient(to bottom, 
@@ -65,8 +66,24 @@
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
         }
 
+        .icon {
+            width: 2.5vh;
+            height: 2.5vh;
+            position: absolute;
+            left: -0.052vw; /* Centers the circle on the line */
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+        }
+
         /*  Circle expands & dissolves ONLY when hovering over the timeline item */
         .timeline-item:hover .circle {
+            transform: translate(-50%, -50%) scale(1.8);
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+        /*  Circle expands & dissolves ONLY when hovering over the timeline item */
+        .timeline-item:hover .icon {
             transform: translate(-50%, -50%) scale(1.8);
             opacity: 0.3;
             filter: blur(5px);
@@ -223,7 +240,7 @@
             position: absolute;
             bottom: 4%;
             right: 5%;
-            width: 15vw;
+            width: 25vw;
             max-width: 30vw;
             max-height: 80vh;
             color: rgb(94, 12, 12);
@@ -400,7 +417,30 @@
                 </div>
             </div>
         </div>
+        <div id="contact" class="section" style="display: none;">
+          <div class="timeline">
+            <!-- E-mail -->
+            <div class="timeline-item" style="border-left:none;">
+              <div class="icon"><i class="fas fa-envelope icon"></i> <!-- E-mail ikonu --></div>
+              <div class="text">
+                <a href="mailto:elifnur.ciftci@gmail.com" class="text" target="_blank" rel="noopener noreferrer">
+                  elifnur.ciftci20@gmail.com
+                </a>
+              </div>
+            </div>
+        
+            <!-- LinkedIn -->
+            <div class="timeline-item" style="border-left:none;">
+              <div class="icon"><i class="fab fa-linkedin icon"></i> <!-- LinkedIn ikonu --></div>
+              <div class="text">
+                <a href="https://www.linkedin.com/in/elifnur-%C3%A7ift%C3%A7i-100a751b9/" class="text" target="_blank" rel="noopener noreferrer">
+                  My Linkedin
+                </a>
+              </div>
+            </div>
 
+          </div>
+        </div>
       
     </div>
     <div id="togglecontainer">
@@ -435,7 +475,7 @@
           info.style.left = `${vw(frameRect.left) -5}vw`;
 
           // Toggle container, frame's bottom-left
-          togglecontainer.style.top = `${vh(frameRect.bottom) - 15}vh`;
+          togglecontainer.style.top = `${vh(frameRect.bottom) - 17}vh`;
           togglecontainer.style.left = `${vw(frameRect.left) - 8}vw`;
       }
 
