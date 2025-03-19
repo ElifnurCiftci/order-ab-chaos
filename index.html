@@ -14,18 +14,76 @@
         html, body {
           background-color: #fff; /* Arka planı sabitle */
           color: rgb(94, 12, 12); /* Varsayılan koyu kırmızı */
-          forced-color-adjust: none; /* Tarayıcının renkleri değiştirmesini engelle */
-          -webkit-text-fill-color: currentColor; /* Opera'nın yazı rengini zorla değiştirmesini önle */
+          forced-color-adjust: none; 
+          -webkit-text-fill-color: currentColor; 
         }
         body {
           margin: 0;
           overflow: hidden;
         }
         a {
-            text-decoration: none; /* Removes underline */
-            font-style: italic; /* Makes text italic */
-            color: inherit; /* Keeps the same color as surrounding text */
+            text-decoration: none; 
+            font-style: italic; 
+            color: inherit; 
         }
+        #loading {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          opacity: 1;
+          transition: opacity 1s ease-in-out;
+        }
+
+        #loading.hidden {
+          opacity: 0;
+        }
+
+        #loading-text {
+          font-family: Georgia, serif;
+          font-size: 4vh;
+          color: rgb(94, 12, 12);
+          text-align: center;
+          animation: fadeOut 4s ease-in-out forwards;
+        }
+
+        
+        #portfolio {
+          animation: glowEffect 3s ease-in-out forwards;
+        }
+
+        
+        @keyframes glowEffect {
+          0% { color: rgb(94, 12, 12); }
+          30% { color: rgb(140, 12, 12); }
+          70% { color: rgb(200, 12, 12); } 
+          90% { color: rgb(140, 12, 12); }
+          100% { color: rgb(94, 12, 12); }
+        }
+
+        /* Tüm yazıyı fade-out yapma */
+        @keyframes fadeOut {
+          0% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+
+        #app {
+          display: none;
+          opacity: 0;
+          transition: opacity 1.3s ease-in-out;
+        }
+
+        #app.visible {
+          opacity: 1;
+        }
+
+
         .timeline {
             position: relative;
             padding-left: 2.8vw; /*  Moves the timeline right */
@@ -60,7 +118,7 @@
             background-color: rgb(94, 12, 12);
             border-radius: 50%;
             position: absolute;
-            left: -0.052vw; /* Centers the circle on the line */
+            left: -0.052vw; 
             top: 50%;
             transform: translate(-50%, -50%);
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
@@ -70,7 +128,7 @@
             width: 2.5vh;
             height: 2.5vh;
             position: absolute;
-            left: -0.052vw; /* Centers the circle on the line */
+            left: -0.052vw;
             top: 50%;
             transform: translate(-50%, -50%);
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
@@ -94,13 +152,12 @@
             font-family: 'Times New Roman', Times, serif;
             font-weight: normal;
             color: rgb(94, 12, 12);
-            padding-left: 0.78vw; /* Converted from 15px */
-            letter-spacing: 0.026vw; /* Converted from 0.5px */
+            padding-left: 0.78vw; 
+            letter-spacing: 0.026vw; 
             line-height: 1.4;
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Text enlarges ONLY when hovering over the timeline item */
         .timeline-item:hover .text {
             transform: scale(1.1);
         }
@@ -155,21 +212,21 @@
           left: 5%;
           transform: translateY(-50%);
           display: flex;
-          flex-direction: column; /* Dikey hizalama */
-          align-items: center; /* Yatayda ortala */
-          gap: 0.5vh; /* Yazı ve yuvarlak arasındaki boşluk */
+          flex-direction: column; 
+          align-items: center; 
+          gap: 0.5vh; 
           pointer-events: none;
         }
 
         #mode-toggle {
-          writing-mode: vertical-lr; /* Metni dikey yaz */
-          transform: rotate(180deg); /* Metni ters çevir */
+          writing-mode: vertical-lr; 
+          transform: rotate(180deg); 
           font-family: Georgia, serif;
           font-size: 2.4vh;
           color: rgb(94, 12, 12);
           cursor: pointer;
           pointer-events: all;
-          white-space: nowrap; /* Yazının tek satırda kalmasını sağla */
+          white-space: nowrap; 
         }
 
         #mode-indicator {
@@ -179,8 +236,8 @@
           border-radius: 50%;
           cursor: pointer;
           pointer-events: all;
-          flex-shrink: 0; /* Yuvarlağın boyutunun sabit kalmasını sağla */
-          order: -1; /* Yuvarlağı yazının üstüne yerleştir */
+          flex-shrink: 0; 
+          order: -1;
         }
 
         #mode-indicator.active {
@@ -212,7 +269,7 @@
         }
         #menu {
           position: absolute;
-          top: calc(15% + 5vh); /* Header yüksekliğine bağlı olarak aşağı kaydır */
+          top: calc(15% + 5vh); 
           left: 4.5%;
           width: 20vw;
           max-width: 40vw;
@@ -250,10 +307,8 @@
             cursor: pointer;
             word-wrap: normal;
             pointer-events: all;
-            /*  Make it scrollable */
             overflow: auto;
             font-size: 2.4vh;
-            /*  Hide scrollbar (Works in most browsers) */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE & Edge */
         }
@@ -262,13 +317,13 @@
             display: none; /* Chrome, Safari */
         }
 
-        /* Adjust positioning when screen is smaller */
+        
         @media only screen and (max-width: 600px){
           #mode-toggle {
             font-size: 1.7vh;
           }
           #text {
-            width: auto; /* Allow the width to adjust based on content */
+            width: auto; 
             font-size: 4vh; 
           }
           #content {
@@ -302,190 +357,209 @@
             padding-right: 0.13vw;
             max-width: 80vw;
             max-height: 35vh;
-            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-y: auto; 
             overflow-x: hidden; 
           }
           .timeline-item {
-              white-space: normal; /* Allow text to wrap */
+              white-space: normal; 
           }
 
           .text {
-              white-space: normal; /* Allow text to wrap */
-              font-size: 2vh; /* Reduce font size for better fit */
+              white-space: normal; 
+              font-size: 2vh; 
           }
         }
     </style>
     <script type="module" crossorigin src="/portfolio/assets/index-CUSyBxBj.js"></script>
   </head>
   <body>
-    <div id="app"></div>
-    <div id="frame">
-      <div id="header">
-        <h1>Elifnur Çiftçi</h1>
-        <h2>Developer & Designer</h2>
+    <div id="loading">
+      <div id="loading-text">
+        Elifnur Çiftçi's <span id="portfolio">Portfolio</span>
       </div>
-      
-      <div id="menu">
-        <button data-section="bio">About Me</button>
-        <button data-section="projects">Projects</button>
-        <button data-section="education">Education</button>
-        <button data-section="experience">Experience</button>
-        <button data-section="contact">Contact</button>
-      </div>
-      
-      <div id="content">
-        <div id="bio" class="section" style="display: block;">
-          Born in 2001
-          in Ankara, Türkiye.
-          I craft code & design,
-          shaped by the balance
-          of chaos and order.
-          Patterns emerge
-          from the unpredictable.
-          I explore this tension
-          to build harmonic,
-          dynamic experiences.
-        </div>
-
-        <div id="projects" class="section" style="display: none;">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="circle"></div>
-              <div class="text">
-                <a href="https://github.com/ElifnurCiftci/Yemek-Asistanim" class="text" target="_blank" rel="noopener noreferrer">
-                  My Food Assistant - Graduation Project
-                </a>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="circle"></div>
-              <div class="text">
-                <a href="https://github.com/ElifnurCiftci/Otomobile-Risc-and-Price-Analyze" class="text" target="_blank" rel="noopener noreferrer">
-                  Otomobile Risc and Price Analyze - Beginner project for machine learning
-                </a>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="circle"></div>
-              <div class="text">
-                <a href="https://github.com/ElifnurCiftci/372Proje" class="text" target="_blank" rel="noopener noreferrer">
-                  Farmacy Stock Dataset Listing - Beginner Project (SQL)
-                </a>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="circle"></div>
-              <div class="text">
-                <a href="https://gitlab.com/ElifnurCiftci/some-risc-v-instructions-written-in-verilog" class="text" target="_blank" rel="noopener noreferrer">
-                  Basic RISC V Processor Design - Beginner Verilog
-                </a>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="circle"></div>
-              <div class="text">
-                <a href="https://gitlab.com/ElifnurCiftci/verilog-calculator_group-project_sqrroot" class="text" target="_blank" rel="noopener noreferrer">
-                  Basic Calculator Group Project - Beginner Verilog
-                </a>
-              </div>
-            </div>
-            
-            
-          </div>
-        </div>
-  
-        <div id="education" class="section" style="display: none;">
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="text">Private Ankara Açı Highschool (2015 - 2019)</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="text">TOBB University of Economics and Technology - Department of Computer Science (2019 - still)</div>
-                </div>
-            </div>
-        </div>
+    </div>
     
-        <div id="experience" class="section" style="display: none;">
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="text">BiSoft Information Technologies Inc. - Front-end Developer (3 month internship)</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="text">idvlabs Software and Consulting Services Inc. - Developer (3 month internship)</div>
-                </div>
-            </div>
+    <div id="app"  style="display: none;">
+      <div id="frame">
+        <div id="header">
+          <h1>Elifnur Çiftçi</h1>
+          <h2>Developer & Designer</h2>
         </div>
-        <div id="contact" class="section" style="display: none; word-wrap: break-word;">
-          <div class="timeline">
-            <div class="timeline-item" style="border-left:none;">
-              <div class="icon"><i class="fas fa-envelope icon"></i> <!-- E-mail ikonu --></div>
-              <div class="text" style="text-align: left;">
-                <a style="padding: 0;" href="mailto:elifnur.ciftci@gmail.com" class="text" target="_blank" rel="noopener noreferrer">
-                  elifnur.ciftci20
-                  @gmail.com
-                </a>
-              </div>
-            </div>
         
-            <div class="timeline-item" style="border-left:none;">
-              <div class="icon"><i class="fab fa-linkedin icon"></i> <!-- LinkedIn ikonu --></div>
-              <div class="text" style="text-align: left;">
-                <a  style="padding: 0;" href="https://www.linkedin.com/in/elifnur-%C3%A7ift%C3%A7i-100a751b9/" class="text" target="_blank" rel="noopener noreferrer">
-                  My Linkedin
-                </a>
-              </div>
-            </div>
-
-          </div>
+        <div id="menu">
+          <button data-section="bio">About Me</button>
+          <button data-section="projects">Projects</button>
+          <button data-section="education">Education</button>
+          <button data-section="experience">Experience</button>
+          <button data-section="contact">Contact</button>
         </div>
+        
+        <div id="content">
+          <div id="bio" class="section" style="display: block;">
+            Born in 2001
+            in Ankara, Türkiye.
+            I craft code & design,
+            shaped by the balance
+            of chaos and order.
+            Patterns emerge
+            from the unpredictable.
+            I explore this tension
+            to build harmonic,
+            dynamic experiences.
+          </div>
+
+          <div id="projects" class="section" style="display: none;">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="circle"></div>
+                <div class="text">
+                  <a href="https://github.com/ElifnurCiftci/Yemek-Asistanim" class="text" target="_blank" rel="noopener noreferrer">
+                    My Food Assistant - Graduation Project
+                  </a>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="circle"></div>
+                <div class="text">
+                  <a href="https://github.com/ElifnurCiftci/Otomobile-Risc-and-Price-Analyze" class="text" target="_blank" rel="noopener noreferrer">
+                    Otomobile Risc and Price Analyze - Beginner project for machine learning
+                  </a>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="circle"></div>
+                <div class="text">
+                  <a href="https://github.com/ElifnurCiftci/372Proje" class="text" target="_blank" rel="noopener noreferrer">
+                    Farmacy Stock Dataset Listing - Beginner Project (SQL)
+                  </a>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="circle"></div>
+                <div class="text">
+                  <a href="https://gitlab.com/ElifnurCiftci/some-risc-v-instructions-written-in-verilog" class="text" target="_blank" rel="noopener noreferrer">
+                    Basic RISC V Processor Design - Beginner Verilog
+                  </a>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="circle"></div>
+                <div class="text">
+                  <a href="https://gitlab.com/ElifnurCiftci/verilog-calculator_group-project_sqrroot" class="text" target="_blank" rel="noopener noreferrer">
+                    Basic Calculator Group Project - Beginner Verilog
+                  </a>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+    
+          <div id="education" class="section" style="display: none;">
+              <div class="timeline">
+                  <div class="timeline-item">
+                      <div class="circle"></div>
+                      <div class="text">Private Ankara Açı Highschool (2015 - 2019)</div>
+                  </div>
+                  <div class="timeline-item">
+                      <div class="circle"></div>
+                      <div class="text">TOBB University of Economics and Technology - Department of Computer Science (2019 - still)</div>
+                  </div>
+              </div>
+          </div>
       
-    </div>
-    <div id="togglecontainer">
-      <div id="mode-toggle">LIGHT / DARK</div>
-      <div id="mode-indicator"></div>
-    </div>
-    <div id="text">ex chao nova harmonia</div>
-    <p id="info">For PC: Left-click brings order. Left-hold rotates. Right-hold relocates. Scroll zooms in/out. For mobile: just touch, hold and drag freely. Note: Outline inspired by Keita Yamada.</p>
-    <div id="copyright">© Elifnur Çiftçi</div>
-    <script>
-      function positionElements() {
-          const frame = document.getElementById("frame");
-          const info = document.getElementById("info");
-          const copyright = document.getElementById("copyright");
-          const togglecontainer = document.getElementById("togglecontainer");
+          <div id="experience" class="section" style="display: none;">
+              <div class="timeline">
+                  <div class="timeline-item">
+                      <div class="circle"></div>
+                      <div class="text">BiSoft Information Technologies Inc. - Front-end Developer (3 month internship)</div>
+                  </div>
+                  <div class="timeline-item">
+                      <div class="circle"></div>
+                      <div class="text">idvlabs Software and Consulting Services Inc. - Developer (3 month internship)</div>
+                  </div>
+              </div>
+          </div>
+          <div id="contact" class="section" style="display: none; word-wrap: break-word;">
+            <div class="timeline">
+              <div class="timeline-item" style="border-left:none;">
+                <div class="icon"><i class="fas fa-envelope icon"></i> </div>
+                <div class="text" style="text-align: left;">
+                  <a style="padding: 0;" href="mailto:elifnur.ciftci@gmail.com" class="text" target="_blank" rel="noopener noreferrer">
+                    elifnur.ciftci20
+                    @gmail.com
+                  </a>
+                </div>
+              </div>
+          
+              <div class="timeline-item" style="border-left:none;">
+                <div class="icon"><i class="fab fa-linkedin icon"></i></div>
+                <div class="text" style="text-align: left;">
+                  <a  style="padding: 0;" href="https://www.linkedin.com/in/elifnur-%C3%A7ift%C3%A7i-100a751b9/" class="text" target="_blank" rel="noopener noreferrer">
+                    My Linkedin
+                  </a>
+                </div>
+              </div>
 
-          // Get frame's position
-          const frameRect = frame.getBoundingClientRect();
-          const viewportHeight = window.innerHeight; // Full viewport height
-          const viewportWidth = window.innerWidth; // Full viewport width
+            </div>
+          </div>
+        
+      </div>
+      <div id="togglecontainer">
+        <div id="mode-toggle">LIGHT / DARK</div>
+        <div id="mode-indicator"></div>
+      </div>
+      <div id="text">ex chao nova harmonia</div>
+      
+      <p id="info">For PC: Left-click brings order. Left-hold rotates. Right-hold relocates. Scroll zooms in/out. For mobile: just touch, hold and drag freely. Note: Outline inspired by Keita Yamada.</p>
+      <div id="copyright">© Elifnur Çiftçi</div>
+      <script>
+        function positionElements() {
+        const frame = document.getElementById("frame");
+        const info = document.getElementById("info");
+        const copyright = document.getElementById("copyright");
+        const togglecontainer = document.getElementById("togglecontainer");
 
-          // Convert px to vh & vw
-          const vh = value => (value / viewportHeight) * 100;
-          const vw = value => (value / viewportWidth) * 100;
+        // Get frame's position
+        const frameRect = frame.getBoundingClientRect();
+        const viewportHeight = window.innerHeight; // Full viewport height
+        const viewportWidth = window.innerWidth; // Full viewport width
 
-          // Copyright, frame's top-left
-          copyright.style.top = `${vh(frameRect.top) - 8}vh`;
-          copyright.style.left = `${vw(frameRect.left) - 5}vw`;
+        // Convert px to vh & vw
+        const vh = value => (value / viewportHeight) * 100;
+        const vw = value => (value / viewportWidth) * 100;
 
-          // Info, frame's bottom-left
-          info.style.top = `${vh(frameRect.bottom) - 4.8}vh`;
-          info.style.left = `${vw(frameRect.left) -5}vw`;
+        // Copyright, frame's top-left
+        copyright.style.top = `${vh(frameRect.top) - 8}vh`;
+        copyright.style.left = `${vw(frameRect.left) - 5}vw`;
 
-          // Toggle container, frame's bottom-left
-          togglecontainer.style.top = `${vh(frameRect.bottom) - 17}vh`;
-          togglecontainer.style.left = `${vw(frameRect.left) - 8}vw`;
+        // Info, frame's bottom-left
+        info.style.top = `${vh(frameRect.bottom) - 4.8}vh`;
+        info.style.left = `${vw(frameRect.left) - 5}vw`;
+
+        // Toggle container, frame's bottom-left
+        togglecontainer.style.top = `${vh(frameRect.bottom) - 17}vh`;
+        togglecontainer.style.left = `${vw(frameRect.left) - 8}vw`;
       }
 
+        window.addEventListener("resize", positionElements);
+        window.addEventListener("load", positionElements);
 
-      // İlk konumlandırma ve pencere boyutu değiştikçe güncelleme
-      window.addEventListener("resize", positionElements);
-      window.addEventListener("load", positionElements);
-    </script>
-    
+        document.addEventListener("DOMContentLoaded", function () {
+          setTimeout(function () {
+            document.getElementById("loading").classList.add("hidden"); //fade-out 
+            setTimeout(function () {
+              document.getElementById("loading").style.display = "none"; 
+              document.getElementById("app").style.display = "block"; 
+              setTimeout(function () {
+                document.getElementById("app").classList.add("visible"); // Fade-in
+                positionElements();
+              }, 30); 
+            }, 900); // `loading` fade-out bitmeden `display: none` olmasın
+          }, 3000); 
+        });
+      </script>
+    </div>
   </body>
   
 </html>
